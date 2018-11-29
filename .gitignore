@@ -1,5 +1,8 @@
 # Prerequisites
 *.d
+*.pyc
+bin/*
+*__pycache__*
 
 # Object files
 *.o
