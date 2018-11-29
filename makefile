@@ -5,6 +5,11 @@ default:
 	@echo Building ==============================
 	g++ $(COMMON) source/viz.cpp source/user.cpp -lmujoco150 -lGL -lglew -lpthread $(MJ_PATH)/bin/libglfw.so.3 -o bin/viz
 
+
+libmj_viz.so:
+	$(CXX) $(COMMON) -Wno-write-strings -shared -Wl,-soname,libmj_viz -o bin/libmj_viz.so -fPIC source/viz.cpp -Isource/ -lmujoco150 -lGL -lglew -lpthread $(MJ_PATH)/bin/libglfw.so.3
+
+
 clean:
 	@echo Cleaning ==============================
 	-rm bin//viz*
