@@ -3,17 +3,11 @@
 // Author Vikashplus@gmail.com      //
 //----------------------------------//
 
-#include "viz.h"
+#include "mj_viz.h"
 #include <unistd.h>
 #include "stdio.h"
 #include "stdlib.h"
-
-// update the viz using your sensor data stream
-void update_viz(double *time, double *qpos, double *qvel, int nq, int nv)
-{
-    // dummy update 
-    qpos[2] += 0.002;
-}
+#include <math.h>
 
 
 int main()
@@ -33,8 +27,23 @@ int main()
     printf("Staring Viz\n");
     viz_init(filePath, licensePath);
 
+    // get model info
+    vizModelInfo info;
+    viz_model_info(&info);
+
+    // use the model info the generate arrays
+    double *qpos = (double *) malloc(info.nq*sizeof(double));
+    double *qvel = (double *) malloc(info.nv*sizeof(double));
+
     // Get up, do a little dance and then close
-    usleep(5000000);
+    for(int i=0; i < 100; i++)
+    {
+        qpos[0] = 0.75*sin(i*0.1);
+        qpos[1] = 0.25*cos(i*0.1);
+        qpos[2] = 1.3;
+        viz_update(double(i), qpos, qvel, info.nq, info.nv);
+        usleep(100000);
+    }
 
     // Close the viz, time to go home.
     viz_close();

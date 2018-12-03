@@ -9,7 +9,7 @@
 #include "string.h"
 #include <unistd.h>
 #include <pthread.h>
-#include "viz.h"
+#include "mj_viz.h"
 
 // MuJoCo data structures
 mjModel* m = NULL;                  // MuJoCo model
@@ -121,6 +121,53 @@ void init_model_data()
 }
 
 
+// get the model info
+bool viz_model_info(vizModelInfo *info)
+{
+    if( !m || !d)
+    {
+        printf("mujocoViz:> Visualizer not initialized. Call 'viz_init' to initialize\n");
+        return false;
+    }
+
+    info->nq = m->nq;
+    info->nv = m->nv;
+    info->nu = m->nu;
+    info->na = m->na;
+    return true;
+}
+
+
+// update the visualizer's state
+bool viz_update(double time, double *qpos, double *qvel, int nq, int nv)
+{
+    if( !m || !d)
+    {
+        printf("mujocoViz:> Visualizer not initialized. Call 'viz_init' to initialize\n");
+        return false;
+    }
+
+    if(!qpos || !qvel)
+    {
+        printf("mujocoViz:> Check arrays\n");
+        return false;
+    }
+
+    if( nq!=m->nq || nv!=m->nv)
+    {
+        printf("mujocoViz:> Check sizes. nq must be %d and nv must be %d\n", m->nq, m->nv);
+        return false;
+    }
+
+    // No locks as this the only write, rest is read
+    d->time = time;
+    mju_copy(d->qpos, qpos, nq);
+    mju_copy(d->qvel, qvel, nq);
+
+    return true;
+}
+
+
 // rendering
 void* viz_render(void* args)
 {
@@ -156,7 +203,7 @@ void* viz_render(void* args)
     while(!glfwWindowShouldClose(window) && mj_initialized)
     {
         // fetch updates from the user/hardware
-        update_viz(&(d->time), d->qpos, d->qvel, m->nq, m->nv);
+        // update_viz(&(d->time), d->qpos, d->qvel, m->nq, m->nv);
         mj_forward(m,d);
 
         // get framebuffer viewport
@@ -186,6 +233,8 @@ void* viz_render(void* args)
     mj_deleteData(d);
     mj_deleteModel(m);
     mj_deactivate();
+    m = NULL;
+    d = NULL;
 
     // Try cean exit for glfw
     try
