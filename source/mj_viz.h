@@ -1,6 +1,7 @@
 //----------------------------------//
 // MuJoCo Visualizer                //
 // Author Vikashplus@gmail.com      //
+// Copyright (c) 2018 Vikash Kumar  //
 //----------------------------------//
 
 #ifndef MJ_VIS_H
@@ -18,13 +19,13 @@
 		int nv;		// number of degrees of freedom = dim(qvel)
 		int nu;		// number of actuators/controls = dim(ctrl)
 		int na;		// number of activation states = dim(act)
-	
+
 	}vizModelInfo;
 
 	// close the viz
 	void viz_close();
 
-	// initialize the viz 
+	// initialize the viz
 	void viz_init(char* modelPath, char* licensePath);
 
 	// update the visualizer's state

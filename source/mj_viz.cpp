@@ -1,6 +1,7 @@
 //----------------------------------//
 // MuJoCo Visualizer                //
 // Author Vikashplus@gmail.com      //
+// Copyright (c) 2018 Vikash Kumar  //
 //----------------------------------//
 
 #include "mujoco.h"
@@ -32,7 +33,7 @@ char license_path[1000];
 
 // status flags
 bool mj_initialized = false;
-bool mj_rendering = false; 
+bool mj_rendering = false;
 
 
 // keyboard callback
@@ -104,7 +105,7 @@ void scroll(GLFWwindow* window, double xoffset, double yoffset)
 
 
 void init_model_data()
-{    
+{
     // activate software
     mj_activate(license_path);
 
@@ -175,7 +176,7 @@ void* viz_render(void* args)
     init_model_data();
     mj_rendering = true;
     printf("mujocoViz:> Rendering thread started\n");
-    
+
     // init GLFW
     if( !glfwInit() )
         mju_error("****** Could not initialize GLFW *******");
@@ -221,7 +222,7 @@ void* viz_render(void* args)
         glfwPollEvents();
 
         // render at ~33 Hz
-        usleep(33000); 
+        usleep(33000);
 
     }
 
@@ -241,7 +242,7 @@ void* viz_render(void* args)
     {
         glfwTerminate();
     }
-    catch (...) 
+    catch (...)
     {
         printf("WARNING: GLFW termination failure\n\n");
     }
@@ -258,7 +259,7 @@ void viz_init(char* modelPath, char* licensePath)
     strcpy(model_path, modelPath);
     strcpy(license_path, licensePath);
 
-    // fire up rendering 
+    // fire up rendering
     int mjThread_error = pthread_create(&vizThread, NULL, viz_render, 0);
     while(!mj_initialized)
         usleep(33000);
@@ -271,7 +272,7 @@ void viz_close()
     mj_initialized = 0;
 
     while(mj_rendering)
-    {   usleep(3000); 
+    {   usleep(3000);
     }
     printf("mujocoViz:> Rendering Exited\n");
 }

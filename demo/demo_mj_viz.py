@@ -1,9 +1,15 @@
+# //----------------------------------//
+# // MuJoCo Visualizer                //
+# // Author Vikashplus@gmail.com      //
+# // Copyright (c) 2018 Vikash Kumar  //
+# //----------------------------------//
+
 import mj_viz as viewer
 
 # ============ Test the wrapper
 if __name__ == "__main__":
-    
-    import numpy as np 
+
+    import numpy as np
     import time
     from pathlib import Path
 

@@ -1,4 +1,10 @@
-#Python wrapper for the visualizer
+#    Python wrapper for the visualizer
+# //----------------------------------//
+# // MuJoCo Visualizer                //
+# // Author Vikashplus@gmail.com      //
+# // Copyright (c) 2018 Vikash Kumar  //
+# //----------------------------------//
+
 from os import path
 import ctypes
 
@@ -51,7 +57,7 @@ class DoubleArrayType:
         return param.ctypes.data_as(ctypes.POINTER(ctypes.c_double))
 
 
-# ============ Initialize the viz  
+# ============ Initialize the viz
 # void viz_init(char* modelPath, char* licensePath);
 _viz_init = lib.viz_init
 _viz_init.argtypes = [ctypes.c_char_p, ctypes.c_char_p]

@@ -1,6 +1,7 @@
 //----------------------------------//
 // MuJoCo Visualizer                //
 // Author Vikashplus@gmail.com      //
+// Copyright (c) 2018 Vikash Kumar  //
 //----------------------------------//
 
 #include "mj_viz.h"
@@ -19,7 +20,7 @@ int main()
     if(homedir == NULL)
     {   printf("ERROR:: Environment variable 'HOME' not found.\n");
         exit(0);
-    }   
+    }
     sprintf(filePath, "%s//.mujoco//mjpro150//model//humanoid.xml", homedir);
     sprintf(licensePath, "%s//.mujoco//mjkey.txt", homedir);
 
@@ -47,5 +48,5 @@ int main()
 
     // Close the viz, time to go home.
     viz_close();
-    return 0;    
+    return 0;
 }
