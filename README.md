@@ -11,7 +11,7 @@ Dependency-free utility library for visualization of MuJoCo Scenes. The library 
 6. Add `mj_viz/source` to your pythonpath.
 
 
-## demo
+## Demo
 1. Use `./bin/mj_viz` to check out the c visualizer demo 
 1. Use `python demo/demo_mj_viz.py` to check out the python visualizer demo 
 
@@ -21,3 +21,6 @@ Dependency-free utility library for visualization of MuJoCo Scenes. The library 
 2. Use `viz_model_info( (*vizModelInfo) info)` to get information about the loaded model
 3. Use `viz_update(time, qpos, qvel, nq, nv)` to update the state of the model loaded in the visualizer
 4. Use `viz_close()` to close the visualizer
+
+## Known Issues 
+The library is developed on Linux. While the code is cross-platform, it has not been tested on other OS.
