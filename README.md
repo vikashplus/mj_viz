@@ -1,5 +1,6 @@
 # mj_viz
-Utility library for visualization of MuJoCo Scenes
+Dependency-free utility library for visualization of MuJoCo Scenes. The library is written purely in C for speed and efficiency. Python bindings are also provided to facilitate usage.
+
 
 ## Build
 1. Download MuJoCo binaries from the official [website](http://www.mujoco.org/) and also obtain the license key.
