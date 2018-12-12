@@ -15,7 +15,7 @@ if __name__ == "__main__":
 
     # Initialize the wrapper
     home = str(Path.home())
-    viewer.viz_init(home+"//.mujoco//mjpro150//model//humanoid.xml", home+"//.mujoco//mjkey.txt")
+    viewer.viz_init(home+"//.mujoco//mujoco200_linux//model//humanoid.xml", home+"//.mujoco//mjkey.txt")
 
     # get model info
     info = viewer.viz_model_info()
