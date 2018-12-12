@@ -1,14 +1,14 @@
-MJ_PATH=$(HOME)/.mujoco/mjpro150
+MJ_PATH=$(HOME)/.mujoco/mujoco200_linux
 COMMON=-O2 -I$(MJ_PATH)/include/ -L$(MJ_PATH)/bin -std=c++11 -mavx
 
 all: viz libviz
 
 viz:
 	@echo Building ==============================
-	g++ $(COMMON) source/mj_viz.cpp demo/demo_mj_viz.cpp -Isource/ -lmujoco150 -lGL -lglew -lpthread $(MJ_PATH)/bin/libglfw.so.3 -o bin/mj_viz
+	g++ $(COMMON) source/mj_viz.cpp demo/demo_mj_viz.cpp -Isource/ -lmujoco200 -lGL -lglew -lpthread $(MJ_PATH)/bin/libglfw.so.3 -o bin/mj_viz
 
 libviz:
-	$(CXX) $(COMMON) -Wno-write-strings -shared -Wl,-soname,libmj_viz -o bin/libmj_viz.so -fPIC source/mj_viz.cpp -Isource/ -lmujoco150 -lGL -lglew -lpthread $(MJ_PATH)/bin/libglfw.so.3
+	$(CXX) $(COMMON) -Wno-write-strings -shared -Wl,-soname,libmj_viz -o bin/libmj_viz.so -fPIC source/mj_viz.cpp -Isource/ -lmujoco200 -lGL -lglew -lpthread $(MJ_PATH)/bin/libglfw.so.3
 
 
 clean:

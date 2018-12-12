@@ -189,8 +189,9 @@ void* viz_render(void* args)
     // initialize visualization data structures
     mjv_defaultCamera(&cam);
     mjv_defaultOption(&opt);
+    mjv_defaultScene(&scn);
     mjr_defaultContext(&con);
-    mjv_makeScene(&scn, 1000);                   // space for 1000 objects
+    mjv_makeScene(m, &scn, 1000);                   // space for 1000 objects
     mjr_makeContext(m, &con, mjFONTSCALE_100);   // model-specific context
 
     // install GLFW mouse and keyboard callbacks
